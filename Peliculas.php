@@ -56,6 +56,27 @@ require_once("pelicula.php");
       return $PeliculasADevolver;
 
     }
+
+    public static function getPelicula($title) {
+      require_once("connect.php");
+
+      $cadenaDeBusqueda = "SELECT * FROM movies WHERE title = :title";
+      $consultaAlaBase = $db->prepare($cadenaDeBusqueda);
+      $title = $title;
+      $consultaAlaBase->bindParam(":title",$title,PDO::PARAM_STR);
+      $consultaAlaBase->execute();
+
+      $peliAux = $consultaAlaBase->fetchAll(PDO::FETCH_ASSOC);
+
+      //Instancio un objeto de tipo Pelicula
+      $peliBuscada   = new pelicula($peliAux[0]['id'],
+                                    $peliAux[0]['title'],
+                                    $peliAux[0]['rating'],
+                                    $peliAux[0]['awards'],
+                                    $peliAux[0]['length']);
+
+      return $peliBuscada;
+    }
   }
 
 ?>

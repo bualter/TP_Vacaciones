@@ -9,5 +9,8 @@
 	}
 	catch( PDOException $ErrorEnConexion ) {
 		echo "Se ha producido un error: ".$ErrorEnConexion->getMessage();
+		echo "<br>";
 	}
+
+
 ?>

@@ -6,18 +6,7 @@
   </head>
   <body>
     <?php
-    require_once 'Peliculas.php';
     require_once 'usuarios.php';
-
-    // Probando peliculas
-
-    $pelis = array();
-    $pelis = Peliculas::ObtenerTodas();
-
-    foreach ($pelis as $unaPelicula) {
-        echo"{$unaPelicula->getTitulo()}";
-        echo("<br>");
-      }
 
     // Probando usuarios
     $usuarios = usuarios::getTodes();

@@ -6,16 +6,17 @@
     private $rating;
     private $awards;
     private $length;
+    private $genreId;
 
 
-    public function __construct($id, $titulo, $rating, $awards, $length) {
+    public function __construct($id, $titulo, $rating, $awards, $length, $genreId) {
 
       $this->id=$id;
-      $this->tittle=$titulo;
+      $this->title=$titulo;
       $this->rating=$rating;
       $this->awards=$awards;
       $this->length=$length;
-
+      $this->genreID=$genreId;
     }
 
     public function getId() {
@@ -23,9 +24,41 @@
     }
 
     public function getTitulo(){
-        return $this->tittle;
+        return $this->title;
     }
 
+    public function getRating(){
+        return $this->rating;
+    }
+    public function getAwards(){
+        return $this->awards;
+    }
+    public function getDuracion(){
+        return $this->length;
+    }
+
+    public function guardar(){
+      require("connect.php");
+      $sql = "INSERT INTO movies_db.movies (created_at,
+                                            updated_at,
+                                            title,
+                                            rating,
+                                            awards,
+                                            length,
+                                            genre_id)
+              VALUES (NOW(),
+                      NOW(),
+                      '{$this->title}',
+                      '{$this->rating}',
+                      '{$this->awards}',
+                      '{$this->length}',
+                      '{$this->genreID}')";
+
+      $query= $db->prepare($sql);
+      $query-> execute();
+      $db= null;
+
+    }
   }
 
 ?>

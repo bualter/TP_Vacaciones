@@ -7,7 +7,6 @@
   <body>
     <?php
     require_once 'Peliculas.php';
-    require_once 'usuarios.php';
 
     // Probando peliculas
 
@@ -15,20 +14,10 @@
     $pelis = Peliculas::ObtenerTodas();
 
     foreach ($pelis as $unaPelicula) {
-        echo"{$unaPelicula->getTitulo()}";
-        echo("<br>");
-      }
-
-    // Probando usuarios
-    $usuarios = usuarios::getTodes();
-
-    foreach ($usuarios as $unUsuario) {
-      echo $unUsuario->getName();
+      echo"{$unaPelicula->getTitulo()}";
       echo("<br>");
     }
 
     ?>
-
-
   </body>
 </html>
