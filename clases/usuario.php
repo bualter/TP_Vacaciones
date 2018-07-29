@@ -13,19 +13,14 @@ class usuario{
   }
 
   public function registrar(){
-
-
   }
 
   public function logear(){
-
   }
 
   public function getName(){
       return $this->name;
   }
-
-
 }
 
  ?>

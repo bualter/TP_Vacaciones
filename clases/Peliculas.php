@@ -15,7 +15,7 @@ require_once("pelicula.php");
         // $TodasLasPeliculas esta vacío.
 
         //Me conecto a la base de datos
-        require_once("connect.php");
+        require_once("..\db\connect.php");
 
         //Ejecuto la lectura
         $CadenaDeBusqueda = "SELECT * FROM movies";
@@ -33,8 +33,8 @@ require_once("pelicula.php");
                                   $UnRegistro['title'],
                                   $UnRegistro['rating'],
                                   $UnRegistro['awards'],
-                                  $UnRegistro['length']);
-
+                                  $UnRegistro['length'],
+                                  $UnRegistro['genre_id']);
 
           //Agrego el objeto Pelicula al array
           $PeliculasADevolver[] = $UnaPeli;
@@ -58,7 +58,7 @@ require_once("pelicula.php");
     }
 
     public static function getPelicula($title) {
-      require_once("connect.php");
+      require_once("..\db\connect.php");
 
       $cadenaDeBusqueda = "SELECT * FROM movies WHERE title = :title";
       $consultaAlaBase = $db->prepare($cadenaDeBusqueda);
@@ -73,7 +73,8 @@ require_once("pelicula.php");
                                     $peliAux[0]['title'],
                                     $peliAux[0]['rating'],
                                     $peliAux[0]['awards'],
-                                    $peliAux[0]['length']);
+                                    $peliAux[0]['length'],
+                                    $peliAux[0]['genre_id']);
 
       return $peliBuscada;
     }

@@ -7,7 +7,7 @@ require_once("usuario.php");
 
         //levantar todas los usuarios de la base
         //Me conecto a la base de datos
-        require_once("connect.php");
+        require_once("..\db\connect.php");
         //Ejecuto la lectura
         $CadenaDeBusqueda = "SELECT * FROM users";
         $ConsultaALaBase = $db->prepare($CadenaDeBusqueda);
