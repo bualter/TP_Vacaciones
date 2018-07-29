@@ -66,17 +66,17 @@ require_once("pelicula.php");
       $consultaAlaBase->bindParam(":title",$title,PDO::PARAM_STR);
       $consultaAlaBase->execute();
 
-      $peliAux = $consultaAlaBase->fetchAll(PDO::FETCH_ASSOC);
-
-      //Instancio un objeto de tipo Pelicula
-      $peliBuscada   = new pelicula($peliAux[0]['id'],
-                                    $peliAux[0]['title'],
-                                    $peliAux[0]['rating'],
-                                    $peliAux[0]['awards'],
-                                    $peliAux[0]['length'],
-                                    $peliAux[0]['genre_id']);
-
-      return $peliBuscada;
+      if ($peliAux = $consultaAlaBase->fetchAll(PDO::FETCH_ASSOC)){
+       //Instancio un objeto de tipo Pelicula
+        $peliBuscada   = new pelicula($peliAux[0]['id'],
+                                      $peliAux[0]['title'],
+                                      $peliAux[0]['rating'],
+                                      $peliAux[0]['awards'],
+                                      $peliAux[0]['length'],
+                                      $peliAux[0]['genre_id']);
+        return $peliBuscada;
+      }
+      return false;
     }
   }
 

@@ -30,6 +30,28 @@ require_once("usuario.php");
       return $UsuariosADevolver;
 
   }
+
+  public static function existeEmail($email) {
+    require_once("db\connect.php");
+
+    $cadenaDeBusqueda = "SELECT * FROM users WHERE email = :email";
+    $consultaAlaBase = $db->prepare($cadenaDeBusqueda);
+    $consultaAlaBase->bindParam(":email",$email,PDO::PARAM_STR);
+    $consultaAlaBase->execute();
+
+    if($usuarioAux = $consultaAlaBase->fetchAll(PDO::FETCH_ASSOC)){
+      $usuarioBuscado   = new usuario($usuarioAux[0]['id'],
+                                      $usuarioAux[0]['name'],
+                                      $usuarioAux[0]['email'],
+                                      $usuarioAux[0]['password']);
+
+      return $usuarioBuscado;
+    }else{
+      return false;
+    }
+  }
+
+
 //  INSERT INTO `movies_db`.`users` (`id`, `name`, `email`, `password`, `remember_token`) VALUES ('1', 'Walter', 'walterprueba@gmail.com', 'sarasa', 'sarasaaaaa');
 
 }

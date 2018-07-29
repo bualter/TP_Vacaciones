@@ -57,7 +57,6 @@
       $query= $db->prepare($sql);
       $query-> execute();
       $db= null;
-
     }
 
     public function modificar(){
