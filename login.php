@@ -1,11 +1,19 @@
 <?php
+require_once('clases\usuario.php');
 
-require_once('funcionesProyectoFinal.php');
+$usuarioAVerificar = new usuario("","","","");
 
-if(estaLogueado()) {
-  header('location: perfil.php');
-  exit;
+/*
+if($usuarioLogueado = $usuarioAVerificar->estaLogueado()) {
+//  header('location: perfil.php');
+//  exit;
+echo("el objeto<br>");
+var_dump($usuarioLogueado);
+echo("sarasasas<br>");
+var_dump($usuarioLogueado->getEmail());
+echo("<br>");
 }
+*/
 
 $errores = [];
 
@@ -17,40 +25,25 @@ $emailLogin = "";
 $passwordLogin = "";
 
 if($_POST){
-  if(esLogin($_POST)){
-    $emailLogin = trim($_POST["email-login"]);
-    $passwordLogin = trim($_POST["password-login"]);
+  $usuarioAVerificar = new usuario("",
+                                   "",
+                                   trim($_POST["email-login"]),
+                                   trim($_POST["password-login"]));
 
-    $errores = validarLogin($_POST);
+  $errores = $usuarioAVerificar->validarLogin();
 
-    if (empty($errores)) {
-
-      $usuario = existeEmailYPassword($emailLogin, $passwordLogin);
-      if ($usuario) {
-        loguear($usuario);
-        header('location: perfil.php');
-        exit;
-      } else {
-        $errores[] = 'No estás registrado o verifica que tu usuario y/o contraseña sean correctos';
-      }
+  if (empty($errores)) {
+    $usuarioAVerificar->loguear();
+    if (isset($_POST["remember"])) {
+       setcookie('email', $usuarioAVerificar->getEmail(), time() + 3600 * 24 * 30);
+       }
+    elseif(isset($_COOKIE['email'])) {
+       setcookie('email', "");
     }
-  } else {
-    $name = trim($_POST["name"]);
-    $lastname = trim($_POST["lastname"]);
-    $email = trim($_POST["email"]);
-    $password = trim($_POST["password"]);
-    $rpassword = trim($_POST["rpassword"]);
-
-    $errores = validar($_POST);
-
-    if (empty($errores)) {
-  		if (count($errores) == 0) {
-  			$usuario = crearArrayUsuario($_POST,'archivo');
-  	    guardarUsuario($usuario);
-        header('Location: registroLogIn.php?registroOK');
-      }
-    }
+    header('location: perfil.php');
+    exit;
   }
+
   if (count($errores) > 0) {
       $visible = 'flex';
   }
@@ -96,8 +89,8 @@ if($_POST){
       <br>
       <div><button type="submit" class="btn-primary">INGRESA</button></div>
     </form>
-    <div class="remember-password"><input type="checkbox" checked="checked" name="remember"> Recordar contraseña</div>
-
+<!--    <div class="remember-password"><input type="checkbox" checked="checked" name="remember"> Recordar contraseña</div>
+-->
   </div>
 
 </body>

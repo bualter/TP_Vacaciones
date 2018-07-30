@@ -32,7 +32,7 @@ require_once("usuario.php");
   }
 
   public static function existeEmail($email) {
-    require_once("db\connect.php");
+    require("db\connect.php");
 
     $cadenaDeBusqueda = "SELECT * FROM users WHERE email = :email";
     $consultaAlaBase = $db->prepare($cadenaDeBusqueda);
