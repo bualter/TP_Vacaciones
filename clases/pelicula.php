@@ -8,7 +8,6 @@
     private $length;
     private $genreId;
 
-
     public function __construct($id, $titulo, $rating, $awards, $length, $genreId) {
 
       $this->id=$id;
@@ -22,11 +21,9 @@
     public function getId() {
       return $this->id;
     }
-
     public function getTitulo(){
         return $this->title;
     }
-
     public function getRating(){
         return $this->rating;
     }
@@ -35,6 +32,9 @@
     }
     public function getDuracion(){
         return $this->length;
+    }
+    public function getGenreId(){
+        return $this->genreId;
     }
 
     public function guardar(){

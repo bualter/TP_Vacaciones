@@ -15,7 +15,7 @@ require_once("pelicula.php");
         // $TodasLasPeliculas esta vacío.
 
         //Me conecto a la base de datos
-        require_once("..\db\connect.php");
+        require_once("db\connect.php");
 
         //Ejecuto la lectura
         $CadenaDeBusqueda = "SELECT * FROM movies";
