@@ -79,11 +79,13 @@ if($_POST){
 
       <div class="form-group">
         <label for="exampleInputEmail1"></label>
+        Email:
         <input type="email" name="email-login" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="email.com" value="<?=$emailLogin?>">
       </div>
 
       <div class="form-group">
         <label for="exampleInputPassword1"></label>
+        Password:
         <input type="password" name="password-login" class="form-control" id="exampleInputPassword1" placeholder="Contraseña">
       </div>
       <br>

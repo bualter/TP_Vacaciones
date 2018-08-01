@@ -1,5 +1,5 @@
 <?php
-	$ruta = 'mysql:host=localhost; dbname=movies_db';
+	$ruta = 'mysql:host=localhost; dbname=movies_db; charset=utf8';
 	$usuario = 'root';
 	$password = '';
 	$opciones = [ PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION ];
